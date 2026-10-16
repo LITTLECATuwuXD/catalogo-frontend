@@ -1,1 +1,6 @@
-<p>movies works!</p>
+<h2>Catálogo de Películas</h2>
+<ul>
+  <li *ngFor="let movie of movies">
+    <strong>{{ movie.title }}</strong> ({{ movie.year }})
+  </li>
+</ul>
