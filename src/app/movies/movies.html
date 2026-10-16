@@ -1,6 +1,16 @@
 <h2>Catálogo de Películas</h2>
-<ul>
-  <li *ngFor="let movie of movies">
-    <strong>{{ movie.title }}</strong> ({{ movie.year }})
-  </li>
-</ul>
+@if (movies === undefined) {
+  <p>Cargando películas...</p>
+} @else if (movies.length === 0) {
+  <p>No hay películas para mostrar.</p>
+} @else {
+  <ul>
+    @for (movie of movies; track movie.id) {
+      <li>
+        <a [routerLink]="['/movie', movie.id]">
+          <strong>{{ movie.title }}</strong> ({{ movie.year }})
+        </a>
+      </li>
+    }
+  </ul>
+}
