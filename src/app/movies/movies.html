@@ -1,16 +1,35 @@
-<h2>Catálogo de Películas</h2>
-@if (movies === undefined) {
-  <p>Cargando películas...</p>
-} @else if (movies.length === 0) {
-  <p>No hay películas para mostrar.</p>
-} @else {
-  <ul>
-    @for (movie of movies; track movie.id) {
-      <li>
-        <a [routerLink]="['/movie', movie.id]">
-          <strong>{{ movie.title }}</strong> ({{ movie.year }})
-        </a>
-      </li>
-    }
-  </ul>
-}
+<div class="container mt-4">
+  <h2 class="text-center mb-4 text-white">Catálogo de Películas</h2>
+
+  @if (movies === undefined) {
+    <p class="text-center text-white">Cargando películas...</p>
+  } @else if (movies.length === 0) {
+    <p class="text-center text-white">No hay películas para mostrar.</p>
+  } @else {
+    <div class="table-responsive">
+      <table class="table table-dark table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Título</th>
+            <th scope="col">Año</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (movie of movies; track movie.id) {
+            <tr>
+              <th scope="row">{{ movie.id }}</th>
+              <td>{{ movie.title }}</td>
+              <td>{{ movie.year }}</td>
+              <td>
+                <!-- Enlace al detalle de la película -->
+                <a [routerLink]="['/movie', movie.id]" class="btn btn-primary btn-sm">Ver Detalle</a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

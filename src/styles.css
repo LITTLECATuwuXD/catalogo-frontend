@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+
+/* Estilos base del body */
+body {
+  margin: 0;
+  padding: 0;
+  color: #323658;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Fondo para la página principal (home / movies) */
+.bg-principal {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/img/fondo-principal.gif');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Fondo para la página de detalle (movie) */
+.bg-detalle {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/img/fondo-detalle.gif');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Estilos para los contenedores semitransparentes */
+header, main, footer, .card, .table-dark {
+  background-color: #00000039;
+  /*backdrop-filter: blur(3px);*/
+}
+
+/* Ajuste para que la tabla se vea bien sobre el fondo */
+.table-dark {
+  --bs-table-bg: transparent;
+  --bs-table-color: #ffffffa9;
+}

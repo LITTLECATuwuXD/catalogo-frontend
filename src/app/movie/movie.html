@@ -1,15 +1,21 @@
-@if (loading) {
-  <p>Cargando detalle de la película...</p>
-} @else if (error) {
-  <p>{{ error }}</p>
-} @else if (movie) {
-  <div>
-    <h2>{{ movie.title }}</h2>
-    <p><strong>Año:</strong> {{ movie.year }}</p>
-    <p><strong>Sinopsis:</strong> {{ movie.synopsis }}</p>
-    <p><strong>Portada:</strong> {{ movie.cover }}</p>
-    <p><a routerLink="/movies">← Volver al catálogo</a></p>
-  </div>
-} @else {
-  <p>No se encontró la película.</p>
-}
+<div class="container mt-5">
+  @if (loading) {
+    <p class="text-center text-white">Cargando detalle de la película...</p>
+  } @else if (error) {
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
+  } @else if (movie) {
+    <div class="card text-white">
+      <div class="card-header">
+        <h2>{{ movie.title }}</h2>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><strong>Año:</strong> {{ movie.year }}</p>
+        <p class="card-text"><strong>Sinopsis:</strong> {{ movie.synopsis }}</p>
+        <p class="card-text"><strong>Portada:</strong> {{ movie.cover }}</p>
+        <a routerLink="/movies" class="btn btn-secondary">← Volver al catálogo</a>
+      </div>
+    </div>
+  } @else {
+    <p class="text-center text-white">No se encontró la película.</p>
+  }
+</div>

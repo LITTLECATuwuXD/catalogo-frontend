@@ -1,5 +1,28 @@
-<h1>Catálogo de Películas</h1>
-<nav>
-  <a routerLink="/movies">Ver todas</a>
-</nav>
-<router-outlet></router-outlet>
+<div class="container-fluid d-flex flex-column m-0 p-0" [ngClass]="fondoActual">
+
+  <!-- HEADER -->
+  <header class="w-100 d-flex align-items-center p-3 text-white">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="h3 m-0">Catálogo de Películas</h1>
+      <!-- Enlace rápido a la lista de películas -->
+      <a routerLink="/movies" class="btn btn-outline-light">Ver Películas</a>
+    </div>
+  </header>
+
+  <!-- BODY / CONTENIDO PRINCIPAL -->
+  <main class="flex-grow-1 d-flex align-items-center justify-content-center text-center text-white p-4">
+    <div class="container">
+      <router-outlet></router-outlet> <!-- Aquí se cargan los componentes -->
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-100 d-flex align-items-center justify-content-center text-center text-white p-3 mt-auto">
+    <div class="container">
+      <p class="mb-1"><strong>Materia:</strong> Conceptualización de entornos de desarrollo de aplicaciones y servicios (IH718)</p>
+      <p class="mb-1"><strong>Alumno:</strong> Carlos Amadeus Álvarez Rocha</p>
+      <p class="mb-1"><strong>Código:</strong> 224790592</p>
+      <p class="mb-0"><strong>Contacto:</strong> <a href="mailto:carlos.alvarez9059@alumnos.udg.mx" class="text-white">carlos.alvarez9059@alumnos.udg.mx</a></p>
+    </div>
+  </footer>
+</div>
