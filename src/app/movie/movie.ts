@@ -1,39 +1,36 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { MovieService, Movie } from '../services/movie';
 
 @Component({
   selector: 'app-movie',
-  imports: [RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './movie.html',
   styleUrls: ['./movie.css']
 })
 export class MovieComponent implements OnInit {
-  movie: any = null;
+  movie: Movie | null = null;
   loading = true;
   error: string | null = null;
-  private apiUrl = 'http://localhost:8000/api/movies';
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
+    private movieService: MovieService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log('MovieComponent ngOnInit, id =', id);
-
     if (!id) {
       this.error = 'No se recibió ID';
       this.loading = false;
       return;
     }
 
-    this.http.get<any>(`${this.apiUrl}/${id}`).subscribe({
+    this.movieService.getMovie(id).subscribe({
       next: (data) => {
-        console.log('Respuesta detalle:', data);
-        this.movie = data.data || data;
+        this.movie = (data as any).data || data;
         this.loading = false;
         this.cdr.detectChanges();
       },

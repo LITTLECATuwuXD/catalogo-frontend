@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+import { MovieService, Movie } from '../services/movie';
 
 @Component({
   selector: 'app-movies',
@@ -10,21 +10,17 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./movies.css']
 })
 export class MoviesComponent implements OnInit {
-  movies: any[] | undefined = undefined;
-  private apiUrl = 'http://localhost:8000/api/movies';
+  movies: Movie[] | undefined = undefined;
 
   constructor(
-    private http: HttpClient,
+    private movieService: MovieService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    console.log('MoviesComponent ngOnInit ejecutado');
-    this.http.get<any>(this.apiUrl).subscribe({
+    this.movieService.getMovies().subscribe({
       next: (response) => {
-        console.log('Respuesta API:', response);
-        this.movies = Array.isArray(response) ? response : (response.data || []);
-        console.log('movies asignado:', this.movies);
+        this.movies = Array.isArray(response) ? response : [];
         this.cdr.detectChanges();
       },
       error: (err) => {
