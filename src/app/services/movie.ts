@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Movie {
@@ -12,35 +12,33 @@ export interface Movie {
   updated_at?: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class MovieService {
   private apiUrl = 'http://localhost:8000/api/movies';
 
   constructor(private http: HttpClient) {}
 
-  // GET /api/movies — índice (equivale al index de Laravel)
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.apiUrl);
   }
 
-  // GET /api/movies/:id — detalle (equivale al show de Laravel)
   getMovie(id: number | string): Observable<Movie> {
     return this.http.get<Movie>(`${this.apiUrl}/${id}`);
   }
 
-  // POST /api/movies — crear (equivale al store)
-  createMovie(movie: Partial<Movie>): Observable<Movie> {
-    return this.http.post<Movie>(this.apiUrl, movie);
+  createMovie(payload: FormData | Partial<Movie>): Observable<Movie> {
+    return this.http.post<Movie>(this.apiUrl, payload);
   }
 
-  // PUT /api/movies/:id — actualizar (equivale al update)
-  updateMovie(id: number | string, movie: Partial<Movie>): Observable<Movie> {
-    return this.http.put<Movie>(`${this.apiUrl}/${id}`, movie);
+  updateMovie(id: number | string, payload: FormData | Partial<Movie>): Observable<Movie> {
+    // Laravel no procesa FormData con PUT directamente; usar _method=PUT
+    if (payload instanceof FormData) {
+      payload.append('_method', 'PUT');
+      return this.http.post<Movie>(`${this.apiUrl}/${id}`, payload);
+    }
+    return this.http.put<Movie>(`${this.apiUrl}/${id}`, payload);
   }
 
-  // DELETE /api/movies/:id — eliminar (equivale al destroy)
   deleteMovie(id: number | string): Observable<{ message: string }> {
     return this.http.delete<{ message: string }>(`${this.apiUrl}/${id}`);
   }

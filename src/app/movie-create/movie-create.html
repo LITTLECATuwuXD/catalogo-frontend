@@ -27,8 +27,12 @@
         </div>
 
         <div class="mb-3">
-          <label for="cover" class="form-label">Portada (URL o nombre)</label>
-          <input type="text" class="form-control" id="cover" [(ngModel)]="newMovie.cover" name="cover" required>
+          <label for="cover" class="form-label">Portada (URL o archivo)</label>
+          <input type="text" class="form-control mb-2" id="coverUrl"
+         [(ngModel)]="newMovie.cover" name="coverUrl"
+         placeholder="https://... o deja vacío si subirás archivo">
+          <input type="file" class="form-control" id="coverFile"
+         (change)="onFileSelected($event)" accept="image/*">
         </div>
 
         <button type="submit" class="btn btn-success">Guardar Película</button>

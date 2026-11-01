@@ -30,4 +30,9 @@ export class MoviesComponent implements OnInit {
       }
     });
   }
+  getCoverUrl(cover: string): string {
+  if (!cover) return 'https://via.placeholder.com/60x90?text=NA';
+  if (cover.startsWith('http')) return cover;
+  return `http://localhost:8000/storage/${cover}`;
+}
 }

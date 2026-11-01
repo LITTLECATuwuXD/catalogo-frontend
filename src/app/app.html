@@ -2,12 +2,15 @@
 
   <!-- HEADER -->
   <header class="w-100 d-flex align-items-center p-3 text-white">
-    <div class="container d-flex justify-content-between align-items-center">
-      <h1 class="h3 m-0">Catálogo de Películas</h1>
-      <!-- Enlace rápido a la lista de películas -->
-      <a routerLink="/movies" class="btn btn-outline-light">Ver Películas</a>
-    </div>
-  </header>
+  <div class="container d-flex justify-content-between align-items-center">
+    <a routerLink="/" class="h3 m-0 text-white text-decoration-none">Catálogo de Películas</a>
+    <nav class="d-flex gap-2">
+      <a routerLink="/" class="btn btn-outline-light btn-sm">Inicio</a>
+      <a routerLink="/movies" class="btn btn-outline-light btn-sm">Catálogo</a>
+      <a routerLink="/movie-create" class="btn btn-success btn-sm">+ Agregar</a>
+    </nav>
+  </div>
+</header>
 
   <!-- BODY / CONTENIDO PRINCIPAL -->
   <main class="flex-grow-1 d-flex align-items-center justify-content-center text-center text-white p-4">

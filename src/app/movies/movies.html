@@ -1,6 +1,9 @@
 <div class="container mt-4">
   <h2 class="text-center mb-4 text-white">Catálogo de Películas</h2>
-  <a routerLink="/movie-create" class="btn btn-success">Agregar Nueva Película</a>
+
+  <div class="text-center mb-3">
+    <a routerLink="/movie-create" class="btn btn-success">Agregar Nueva Película</a>
+  </div>
 
   @if (movies === undefined) {
     <p class="text-center text-white">Cargando películas...</p>
@@ -12,6 +15,7 @@
         <thead>
           <tr>
             <th scope="col">ID</th>
+            <th scope="col">Portada</th>
             <th scope="col">Título</th>
             <th scope="col">Año</th>
             <th scope="col">Acciones</th>
@@ -21,13 +25,23 @@
           @for (movie of movies; track movie.id) {
             <tr>
               <th scope="row">{{ movie.id }}</th>
-              <td>{{ movie.title }}</td>
+              <td>
+                <img
+                  [src]="getCoverUrl(movie.cover)"
+                  alt="Portada"
+                  style="height: 60px; object-fit: cover;"
+                  onerror="this.src='https://via.placeholder.com/60x90?text=NA'"
+                />
+              </td>
+              <td>
+                <a [routerLink]="['/movie', movie.id]" class="text-info text-decoration-none">
+                  {{ movie.title }}
+                </a>
+              </td>
               <td>{{ movie.year }}</td>
               <td>
-                <!-- Enlace al detalle de la película -->
-                <a [routerLink]="['/movie', movie.id]" class="btn btn-primary btn-sm">Ver Detalle</a>
-                <!-- Botón para editar -->
-                <a [routerLink]="['/movie/edit', movie.id]" class="btn btn-warning btn-sm me-1">Editar</a>
+                <a [routerLink]="['/movie', movie.id]" class="btn btn-primary btn-sm me-1">Ver</a>
+                <a [routerLink]="['/movie/edit', movie.id]" class="btn btn-warning btn-sm">Editar</a>
               </td>
             </tr>
           }
