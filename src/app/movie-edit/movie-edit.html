@@ -1,0 +1,43 @@
+<!-- src/app/movie-edit/movie-edit.html -->
+<div class="container mt-5">
+  <div class="card bg-dark text-white shadow">
+    <div class="card-header">
+      <h2>Editar Película</h2>
+    </div>
+    <div class="card-body">
+
+      @if (loading) {
+        <p>Cargando datos...</p>
+      } @else {
+        @if (errorMessage) {
+          <div class="alert alert-danger">{{ errorMessage }}</div>
+        }
+
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="title" class="form-label">Título</label>
+            <input type="text" class="form-control" id="title" [(ngModel)]="movie.title" name="title" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="synopsis" class="form-label">Sinopsis</label>
+            <textarea class="form-control" id="synopsis" rows="3" [(ngModel)]="movie.synopsis" name="synopsis" required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="year" class="form-label">Año</label>
+            <input type="number" class="form-control" id="year" [(ngModel)]="movie.year" name="year" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="cover" class="form-label">Portada</label>
+            <input type="text" class="form-control" id="cover" [(ngModel)]="movie.cover" name="cover" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Actualizar Película</button>
+          <a routerLink="/movies" class="btn btn-secondary ms-2">Cancelar</a>
+        </form>
+      }
+    </div>
+  </div>
+</div>

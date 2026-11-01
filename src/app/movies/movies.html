@@ -1,5 +1,6 @@
 <div class="container mt-4">
   <h2 class="text-center mb-4 text-white">Catálogo de Películas</h2>
+  <a routerLink="/movie-create" class="btn btn-success">Agregar Nueva Película</a>
 
   @if (movies === undefined) {
     <p class="text-center text-white">Cargando películas...</p>
@@ -25,6 +26,8 @@
               <td>
                 <!-- Enlace al detalle de la película -->
                 <a [routerLink]="['/movie', movie.id]" class="btn btn-primary btn-sm">Ver Detalle</a>
+                <!-- Botón para editar -->
+                <a [routerLink]="['/movie/edit', movie.id]" class="btn btn-warning btn-sm me-1">Editar</a>
               </td>
             </tr>
           }
