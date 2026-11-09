@@ -2,7 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MovieService, Movie } from '../services/movie';
-
+import { environment } from '../../environments/environment';
+// /catalogo-frontend/src/app/movie/movie.ts
 @Component({
   selector: 'app-movie',
   standalone: true,
@@ -43,8 +44,13 @@ export class MovieComponent implements OnInit {
       }
     });
   }
-
   getCoverUrl(cover: string): string {
+  if (!cover) return 'https://via.placeholder.com/60x90?text=NA';
+  if (cover.startsWith('http')) return cover;
+  return `${environment.storageUrl}/${cover}`;
+  }
+
+  /*getCoverUrl(cover: string): string {
     if (!cover) return 'https://via.placeholder.com/300x450?text=Sin+portada';
     // Si es URL absoluta, se usa tal cual
     if (cover.startsWith('http://') || cover.startsWith('https://')) {
@@ -52,7 +58,7 @@ export class MovieComponent implements OnInit {
     }
     // Si es ruta relativa del storage de Laravel
     return `http://localhost:8000/storage/${cover}`;
-  }
+  }*/
 
   confirmDelete(): void {
     if (!this.movie) return;

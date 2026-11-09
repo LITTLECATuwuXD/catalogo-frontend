@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'; // Ajusta la ruta
 
 export interface Movie {
   id: number;
@@ -14,9 +15,11 @@ export interface Movie {
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {
-  private apiUrl = 'http://localhost:8000/api/movies';
+  private apiUrl = `${environment.apiUrl}/movies`;
 
   constructor(private http: HttpClient) {}
+
+  // ... resto del código igual
 
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.apiUrl);
